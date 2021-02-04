@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Temperature Hot</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background: url(images/bg-image.jpg) no-repeat;
+            background-size: cover;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form class="col-md-6 m-auto py-5">
+            <div class="input-group mb-3">
+                <input type="text" id="location" class="form-control" placeholder="Enter a location for Weather ...">
+                <div class="input-group-append">
+                    <button type="button" onclick="Temperatur()" class="btn btn-danger">Search</button>
+                </div>
+            </div>
+        </form>
+        <div class="weather-status text-white text-center">
+            <img id="conditionIcon" src="" alt="">
+            <h1 id="city"></h1>
+            <h3><span id="degree">0</span>&deg;C</h3>
+            <h1 id="wathercondition"></h1>
+        </div>
+    </div>
+<script>
+    
+
+    function Temperatur(){
+    const locations=document.getElementById('location').value;
+    const Temperature=document.getElementById('degree');
+    const city=document.getElementById('city');
+    const wathercondition=document.getElementById('wathercondition');
+    const conditionicon=document.getElementById('conditionIcon');
+    
+    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${locations}&APPID=6634cd4f2d974b2629d9b93e4106bedb&units=metric`)
+    .then(res=>res.json())
+    .then(data=>{
+        Temperature.innerText=data.main.temp;
+        city.innerText=data.name;
+        wathercondition.innerText=data.weather[0].description;
+        conditionicon.src=`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+        console.log(data);
+    })
+}
+</script>
+</body>
+
+</html>
