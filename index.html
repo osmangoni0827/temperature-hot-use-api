@@ -36,7 +36,7 @@
         </div>
     </div>
 <script>
-    
+
 
     function Temperatur(){
     const locations=document.getElementById('location').value;
@@ -44,8 +44,9 @@
     const city=document.getElementById('city');
     const wathercondition=document.getElementById('wathercondition');
     const conditionicon=document.getElementById('conditionIcon');
-    
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${locations}&APPID=6634cd4f2d974b2629d9b93e4106bedb&units=metric`)
+    const apiKey = "7155b272f7a80a78d1951ab8c9916a52";
+    const baseUrl = `https://api.openweathermap.org/data/2.5/weather?q=${locations}&appid=${apiKey}&units=metric`;
+    fetch(baseUrl)
     .then(res=>res.json())
     .then(data=>{
         Temperature.innerText=data.main.temp;
